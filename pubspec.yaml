@@ -1,6 +1,8 @@
 name: read_more_text_url
 description: "A Flutter package that provides a Read More/Read Less text expansion widget with advanced features such as URL and email detection, custom link styling, dynamic pattern matching, and click actions on links"
 version: 0.0.1
+homepage: "https://github.com/SaurabhYadav5675"
+repository: "https://github.com/SaurabhYadav5675/read_more_text_url"
 
 environment:
   sdk: '>=3.2.1 <4.0.0'

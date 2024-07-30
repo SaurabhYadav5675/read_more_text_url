@@ -334,7 +334,7 @@ class ReadMoreTextState extends State<ReadMoreText> {
       if (didExceedLimit) {
         return TextSpan(
           style: effectiveTextStyle,
-          text: textMessage,
+          text: "$textMessage ",
           children: <TextSpan>[delimiter, link],
         );
       } else {
