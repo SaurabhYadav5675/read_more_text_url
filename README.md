@@ -33,9 +33,8 @@ Here’s a basic example of how to use the `ReadMoreText` widget in your Flutter
 
 ```dart
 ReadMoreText
-("Read more and read less is used to improve the page text visibility. It allows users to read the page's full content by pressing the read more button and hiding the content by pressing the read less button.
-"
-,trimCollapsedText: 'Show more',
+("Read more and read less is used to improve the page text visibility. It allows users to read the page's full content by pressing the read more button and hiding the content by pressing the read less button.",
+trimCollapsedText: 'Show more',
 trimExpandedText: 'Show less',
 trimMode: TrimMode.Line,
 trimLines: 2,
@@ -52,9 +51,8 @@ The `linkPattern` parameter allows you to specify additional text patterns.
 
 ```dart
 ReadMoreText
-("The Dart ecosystem uses packages to manage shared software such as libraries and tools. To get Dart packages, you use the pub package manager. You can find publicly available packages on the https://pub.dev , or you can load packages from the local file system or elsewhere
-"
-,trimCollapsedText: 'Show more',
+("The Dart ecosystem uses packages to manage shared software such as libraries and tools. To get Dart packages, you use the pub package manager. You can find publicly available packages on the https://pub.dev , or you can load packages from the local file system or elsewhere",
+trimCollapsedText: 'Show more',
 trimExpandedText: 'Show less',
 trimMode: TrimMode.Line,
 trimLines: 5,

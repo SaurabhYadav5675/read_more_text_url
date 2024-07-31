@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String dataLink =
       "As a plugin package contains code for several platforms  https://docs.flutter.dev/packages-and-plugins/developing-packages written in several programming https://docs.flutter.dev languages, some specific steps are needed to ensure a smooth experience.lets cross third to to test trim.";
   String dataNormal =
-      "As a plugin package contains code for several platforms written in several programming languages, some specific steps are needed to ensure a smooth experience.lets cross third to to test trim.As a plugin package contains code for several platforms written in several programming languages,As a plugin package contains code for several platforms written in several programming , As a plugin package contains code for several platforms written in several programming, As a plugin package contains code for several platforms written in several programming As a plugin package contains code for several platforms written in several programming, As a plugin package contains code for several platforms written in several programming";
+      "As a plugin package contains code for several platforms written in several programming languages, some specific steps are needed to ensure a smooth experience.lets cross third to to test trim.As a plugin package contains code for several platforms written in several programming languages.";
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +50,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding: const EdgeInsets.all(8.0),
                 child: Center(
                     child: ReadMoreText(
-                  dataNormal,
+                  dataLink,
                   trimMode: TrimMode.Line,
-                  trimLines: 4,
+                  trimLines: 2,
                   moreStyle: const TextStyle(
                       color: Colors.blue, fontWeight: FontWeight.w400),
                   lessStyle: const TextStyle(

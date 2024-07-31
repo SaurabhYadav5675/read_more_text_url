@@ -215,7 +215,8 @@ class ReadMoreTextState extends State<ReadMoreText> {
             textSize.height,
           ));
 
-          endIndex = textPainter.getOffsetBefore(pos.offset) ?? 0;
+          endIndex =
+              textPainter.getOffsetBefore(pos.offset - widget.trimLines) ?? 0;
         } else {
           var pos = textPainter.getPositionForOffset(
             textSize.bottomLeft(Offset.zero),
