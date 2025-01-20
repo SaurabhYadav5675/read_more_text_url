@@ -17,7 +17,7 @@ links.
 In the `pubspec.yaml` of your flutter project, add the following dependency:
 
 ```yaml
-read_more_text_url: ^0.0.1
+read_more_text_url: ^0.0.2
 ```
 
 Run `flutter pub get` to install the package.<br/>
@@ -36,7 +36,7 @@ ReadMoreText
 ("Read more and read less is used to improve the page text visibility. It allows users to read the page's full content by pressing the read more button and hiding the content by pressing the read less button.",
 trimCollapsedText: 'Show more',
 trimExpandedText: 'Show less',
-trimMode: TrimMode.Line,
+trimMode: TrimMode.line,
 trimLines: 2,
 colorClickableText: Colors.blue,
 linkStyle: TextStyle(color: Colors.blue, decoration: TextDecoration.underline),
@@ -54,14 +54,14 @@ ReadMoreText
 ("The Dart ecosystem uses packages to manage shared software such as libraries and tools. To get Dart packages, you use the pub package manager. You can find publicly available packages on the https://pub.dev , or you can load packages from the local file system or elsewhere",
 trimCollapsedText: 'Show more',
 trimExpandedText: 'Show less',
-trimMode: TrimMode.Line,
+trimMode: TrimMode.line,
 trimLines: 5,
 colorClickableText: Colors.blue,
 linkPattern: r'((https?://)|(www\.))([^\s/$.?#].\s*)',
 style: TextStyle(color: Colors.black, fontWeight: FontWeight.w400),
 moreStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.w400),
 lessStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.w400),
-inkStyle: TextStyle(color: Colors.blue, decoration: TextDecoration.underline),
+linkStyle: TextStyle(color: Colors.blue, decoration: TextDecoration.underline),
 onLinkClicked: (value) {print("clicked link $value");}
 )
 ```

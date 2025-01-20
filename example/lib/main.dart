@@ -32,10 +32,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String dataLink =
-      "As a plugin package contains code for several platforms  https://docs.flutter.dev/packages-and-plugins/developing-packages written in several programming https://docs.flutter.dev languages, some specific steps are needed to ensure a smooth experience.lets cross third to to test trim.";
-  String dataNormal =
-      "As a plugin package contains code for several platforms written in several programming languages, some specific steps are needed to ensure a smooth experience.lets cross third to to test trim.As a plugin package contains code for several platforms written in several programming languages.";
+  String linkText =
+      "I have developed a Flutter package that offers a https://pub.dev/packages/read_more_text_url text expansion widget. This package includes advanced features such as URL and email detection, custom link styling, dynamic pattern matching, and the ability to add click actions on links. You can also check out an example here https://pub.dev/packages/read_more_text_url/example to see it in action.";
+  String normalText =
+      "I have developed a Flutter package that offers a Read More/Read Less text expansion widget. This package comes with several advanced features, including the ability to detect URLs and emails, custom link styling, dynamic pattern matching, and support for click actions on links.";
 
   @override
   Widget build(BuildContext context) {
@@ -47,19 +47,31 @@ class _MyHomePageState extends State<MyHomePage> {
         body: Column(
           children: [
             Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                    child: ReadMoreText(
-                  dataLink,
-                  trimMode: TrimMode.Line,
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: ReadMoreText(
+                  linkText,
+                  trimMode: TrimMode.line,
                   trimLines: 2,
+                  style: const TextStyle(fontSize: 18),
                   moreStyle: const TextStyle(
                       color: Colors.blue, fontWeight: FontWeight.w400),
                   lessStyle: const TextStyle(
                       color: Colors.blue, fontWeight: FontWeight.w400),
                   linkStyle: const TextStyle(
-                      color: Colors.blue, decoration: TextDecoration.underline),
-                ))),
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
+                    decorationColor: Colors.blue,
+                  ),
+                  hyperLinkMaps: const [
+                    {
+                      "https://pub.dev/packages/read_more_text_url":
+                          "Read More/Read Less"
+                    }
+                  ],
+                ),
+              ),
+            ),
           ],
         ));
   }

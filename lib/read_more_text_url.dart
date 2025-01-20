@@ -4,8 +4,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 enum TrimMode {
-  Length,
-  Line,
+  length,
+  line,
 }
 
 class ReadMoreText extends StatefulWidget {
@@ -21,8 +21,8 @@ class ReadMoreText extends StatefulWidget {
       this.colorClickableText,
       this.trimLength = 240,
       this.trimLines = 2,
-      this.trimMode = TrimMode.Length,
-      this.style,
+      this.trimMode = TrimMode.length,
+      required this.style,
       this.textAlign,
       this.textDirection,
       this.locale,
@@ -34,7 +34,8 @@ class ReadMoreText extends StatefulWidget {
       this.delimiterStyle,
       this.onAction,
       this.linkStyle,
-      this.onLinkClicked})
+      this.onLinkClicked,
+      this.hyperLinkMaps})
       : super(key: key);
 
   /// Used on TrimMode.Length
@@ -83,13 +84,14 @@ class ReadMoreText extends StatefulWidget {
   final String trimExpandedText;
   final String trimCollapsedText;
   final Color? colorClickableText;
-  final TextStyle? style;
+  final TextStyle style;
   final TextAlign? textAlign;
   final TextDirection? textDirection;
   final Locale? locale;
   final double? textScaleFactor;
   final String? semanticsLabel;
   final TextStyle? delimiterStyle;
+  final List<Map<String, dynamic>>? hyperLinkMaps;
 
   @override
   ReadMoreTextState createState() => ReadMoreTextState();
@@ -113,7 +115,7 @@ class ReadMoreTextState extends State<ReadMoreText> {
   Widget build(BuildContext context) {
     final DefaultTextStyle defaultTextStyle = DefaultTextStyle.of(context);
     TextStyle? effectiveTextStyle = widget.style;
-    if (widget.style?.inherit ?? false) {
+    if (widget.style.inherit) {
       effectiveTextStyle = defaultTextStyle.style.merge(widget.style);
     }
 
@@ -128,18 +130,18 @@ class ReadMoreTextState extends State<ReadMoreText> {
     final colorClickableText =
         widget.colorClickableText ?? Theme.of(context).colorScheme.secondary;
     final defaultLessStyle = widget.lessStyle ??
-        effectiveTextStyle?.copyWith(color: colorClickableText);
+        effectiveTextStyle.copyWith(color: colorClickableText);
     final defaultMoreStyle = widget.moreStyle ??
-        effectiveTextStyle?.copyWith(color: colorClickableText);
+        effectiveTextStyle.copyWith(color: colorClickableText);
     final defaultDelimiterStyle = widget.delimiterStyle ?? effectiveTextStyle;
 
-    TextSpan link = TextSpan(
+    TextSpan rmlText = TextSpan(
       text: _readMore ? widget.trimCollapsedText : widget.trimExpandedText,
       style: _readMore ? defaultMoreStyle : defaultLessStyle,
       recognizer: TapGestureRecognizer()..onTap = _onReadMoreToggle,
     );
 
-    TextSpan _delimiter = TextSpan(
+    TextSpan delimiter = TextSpan(
       text: _readMore
           ? widget.trimCollapsedText.isNotEmpty
               ? widget.delimiter
@@ -180,7 +182,7 @@ class ReadMoreTextState extends State<ReadMoreText> {
 
         // Layout and measure link
         TextPainter textPainter = TextPainter(
-          text: link,
+          text: rmlText,
           textAlign: textAlign,
           textDirection: textDirection,
           textScaleFactor: textScaleFactor,
@@ -190,10 +192,10 @@ class ReadMoreTextState extends State<ReadMoreText> {
         );
 
         textPainter.layout(minWidth: 0, maxWidth: maxWidth);
-        final linkSize = textPainter.size;
+        final rmlTextSize = textPainter.size;
 
         // Layout and measure delimiter
-        textPainter.text = _delimiter;
+        textPainter.text = delimiter;
         textPainter.layout(minWidth: 0, maxWidth: maxWidth);
         final delimiterSize = textPainter.size;
 
@@ -206,8 +208,8 @@ class ReadMoreTextState extends State<ReadMoreText> {
         bool linkLongerThanLine = false;
         int endIndex;
 
-        if (linkSize.width < maxWidth) {
-          final readMoreSize = linkSize.width + delimiterSize.width;
+        if (rmlTextSize.width < maxWidth) {
+          final readMoreSize = rmlTextSize.width + delimiterSize.width;
           final pos = textPainter.getPositionForOffset(Offset(
             textDirection == TextDirection.rtl
                 ? readMoreSize
@@ -227,7 +229,7 @@ class ReadMoreTextState extends State<ReadMoreText> {
 
         TextSpan textSpan;
         switch (widget.trimMode) {
-          case TrimMode.Length:
+          case TrimMode.length:
             bool isExceeded = widget.trimLength < widget.data.length;
             final paintText = isExceeded && _readMore
                 ? widget.data.substring(0, widget.trimLength)
@@ -236,10 +238,10 @@ class ReadMoreTextState extends State<ReadMoreText> {
                 effectiveTextStyle: effectiveTextStyle,
                 textMessage: paintText,
                 didExceedLimit: isExceeded,
-                delimiter: _delimiter,
-                link: link);
+                delimiter: delimiter,
+                link: rmlText);
             break;
-          case TrimMode.Line:
+          case TrimMode.line:
             bool isExceeded = textPainter.didExceedMaxLines;
             final paintText = isExceeded && _readMore
                 ? widget.data.substring(0, endIndex) +
@@ -249,8 +251,8 @@ class ReadMoreTextState extends State<ReadMoreText> {
                 effectiveTextStyle: effectiveTextStyle,
                 textMessage: paintText,
                 didExceedLimit: isExceeded,
-                delimiter: _delimiter,
-                link: link);
+                delimiter: delimiter,
+                link: rmlText);
             break;
           default:
             throw Exception(
@@ -307,11 +309,20 @@ class ReadMoreTextState extends State<ReadMoreText> {
     if (isUrlExist) {
       for (String word in textMessage.split(" ")) {
         if (checkUrl(word)) {
+          String message = word;
+          if (widget.hyperLinkMaps != null) {
+            for (var data in widget.hyperLinkMaps!) {
+              if (data.containsKey(word)) {
+                message = data[word].toString(); // Get the value of the key
+                break;
+              }
+            }
+          }
           list.add(
             TextSpan(
               children: [
                 TextSpan(
-                    text: word.trim(),
+                    text: message.trim(),
                     style: linkStyle,
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {

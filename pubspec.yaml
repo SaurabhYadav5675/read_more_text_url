@@ -1,6 +1,6 @@
 name: read_more_text_url
-description: "A Flutter package that provides a Read More/Read Less text expansion widget with advanced features such as URL and email detection, custom link styling, dynamic pattern matching, and click actions on links"
-version: 0.0.1
+description: "A Flutter package that provides a Read More/Read Less text expansion widget with advanced features such as URL and email detection."
+version: 0.0.2
 homepage: "https://github.com/SaurabhYadav5675"
 repository: "https://github.com/SaurabhYadav5675/read_more_text_url"
 
@@ -21,7 +21,6 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
-flutter:
 
 # To add assets to your package, add an assets section, like this:
 # assets:
