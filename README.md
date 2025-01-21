@@ -32,15 +32,15 @@ import 'package:read_more_text_url/read_more_text.dart';
 Here’s a basic example of how to use the `ReadMoreText` widget in your Flutter app:
 
 ```dart
-ReadMoreText
-("Read more and read less is used to improve the page text visibility. It allows users to read the page's full content by pressing the read more button and hiding the content by pressing the read less button.",
+ReadMoreText(
+"Read more and read less is used to improve the page text visibility. It allows users to read the page's full content by pressing the read more button and hiding the content by pressing the read less button.",
 trimCollapsedText: 'Show more',
 trimExpandedText: 'Show less',
 trimMode: TrimMode.line,
+style: const TextStyle(fontSize: 18,color: Colors.black, fontWeight: FontWeight.w400),
 trimLines: 2,
 colorClickableText: Colors.blue,
 linkStyle: TextStyle(color: Colors.blue, decoration: TextDecoration.underline),
-onLinkClicked: (value) {print("clicked link $value");},
 )
 ```
 
@@ -50,19 +50,42 @@ You can customize the appearance of links and other matched patterns using the `
 The `linkPattern` parameter allows you to specify additional text patterns.
 
 ```dart
-ReadMoreText
-("The Dart ecosystem uses packages to manage shared software such as libraries and tools. To get Dart packages, you use the pub package manager. You can find publicly available packages on the https://pub.dev , or you can load packages from the local file system or elsewhere",
+ReadMoreText(
+"The Dart ecosystem uses packages to manage shared software such as libraries and tools. To get Dart packages, you use the pub package manager. You can find publicly available packages on the https://pub.dev , or you can load packages from the local file system or elsewhere",
 trimCollapsedText: 'Show more',
 trimExpandedText: 'Show less',
 trimMode: TrimMode.line,
-trimLines: 5,
+trimLines: 2,
 colorClickableText: Colors.blue,
 linkPattern: r'((https?://)|(www\.))([^\s/$.?#].\s*)',
-style: TextStyle(color: Colors.black, fontWeight: FontWeight.w400),
-moreStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.w400),
-lessStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.w400),
-linkStyle: TextStyle(color: Colors.blue, decoration: TextDecoration.underline),
+style: const TextStyle(fontSize: 18,color: Colors.black, fontWeight: FontWeight.w400),
+moreStyle: const TextStyle(color: Colors.blue, fontWeight: FontWeight.w400),
+lessStyle: const TextStyle(color: Colors.blue, fontWeight: FontWeight.w400),
+linkStyle: const TextStyle(color: Colors.blue, decoration: TextDecoration.underline),
 onLinkClicked: (value) {print("clicked link $value");}
+)
+```
+
+### Text With Url and HyperLink Example
+
+You can customize the appearance of plain link into a text-based, styled link, which is more elegant while still maintaining its functionality as a clickable link.
+The `hyperLinkMaps` parameter applies to map link with text.
+
+```dart
+ReadMoreText(
+"I have developed a Flutter package that offers a https://pub.dev/packages/read_more_text_url text expansion widget. This package includes advanced features such as URL and email detection, custom link styling, dynamic pattern matching, and the ability to add click actions on links. You can also check out an example here https://pub.dev/packages/read_more_text_url/example to see it in action.",
+trimCollapsedText: 'Show more',
+trimExpandedText: 'Show less',
+trimMode: TrimMode.line,
+trimLines: 3,
+colorClickableText: Colors.blue,
+linkPattern: r'((https?://)|(www\.))([^\s/$.?#].\s*)',
+style: const TextStyle(fontSize: 18,color: Colors.black, fontWeight: FontWeight.w400),
+moreStyle: const TextStyle(color: Colors.blue, fontWeight: FontWeight.w400),
+lessStyle: const TextStyle(color: Colors.blue, fontWeight: FontWeight.w400),
+linkStyle: const TextStyle(color: Colors.blue, decoration: TextDecoration.underline),
+onLinkClicked: (value) {print("clicked link $value");},
+hyperLinkMaps: const [{"https://pub.dev/packages/read_more_text_url": "Read More/Read Less"}]
 )
 ```
 
